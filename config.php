@@ -1,12 +1,12 @@
 <?php
-$host = getenv('MYSQL_HOST');
-$user = getenv('MYSQL_USER');
-$pass = getenv('MYSQL_PASSWORD');
-$db   = getenv('MYSQL_DATABASE');
-$port = getenv('MYSQL_PORT') ?: 3306;
+$host = getenv('MYSQL_HOST'); "mainline.proxy.rlwy.net"
+$user = getenv('MYSQL_USER'); "postgres"
+$pass = getenv('MYSQL_PASSWORD'); "ChaDAAzAkWxPInGkXcpZkibxsNOtSMra"
+$db   = getenv('MYSQL_DATABASE'); "railway"
+$port = getenv('MYSQL_PORT') ?: 52864;
 
-$conn = new mysqli($host, $user, $pass, $db, $port);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$conn = pg_connect("host=$host, user=$user, password=$pass, dbname=$db, port=$port);
+if (!$conn) {
+    die("Connection failed: " . pg_last_error());
 }
 ?>
